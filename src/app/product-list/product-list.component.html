@@ -1,0 +1,28 @@
+<h2>products</h2>
+
+<div class="product-item" *ngFor="let product of products; index as productId; first as isFirst">
+    <h3>No. {{productId}}</h3>
+    <a [title]="product.name+'detail'" [routerLink]="['/products', productId]">
+        <span>Product name：{{ product.name }}</span>
+        <i nz-icon nzType="right" nzTheme="outline"></i>
+    </a>
+    <!-- on sell提示 -->
+    <!-- <span class="notice" *ngIf="isFirst">sole</span> -->
+
+    <p>Description: {{ product.description }}</p>
+
+    <button nz-button nzType="primary" (click)="share(product)">Share</button>
+    <app-product-alerts [product]="product" (notify)="onNotify()"></app-product-alerts>
+</div>
+
+
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="shareProductInfo.name" (nzOnCancel)="handleCancel('isVisible')"
+    (nzOnOk)="handleOk('isVisible')">
+    <p>{{shareProductInfo.description}}</p>
+    <h3>The product has been shared!</h3>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isNotifyVisible" nzTitle="111" (nzOnCancel)="handleCancel('isNotifyVisible')"
+    (nzOnOk)="handleOk('isNotifyVisible')">
+    <p>1111111111111</p>
+</nz-modal>
